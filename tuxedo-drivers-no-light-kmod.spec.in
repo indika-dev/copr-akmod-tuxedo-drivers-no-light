@@ -34,7 +34,7 @@ Tuxedo drivers as kmod
 %prep
 echo "Prepare stage -----------------------------------------------------------------------------------------------"
 %setup -q -c -T -a 0
-tar xzf %{modname}-v%{version}.tar.gz --strip-components=1
+tar xzf %{modname}-v%{version}.tar.gz || true
 cd %{modname}-%{version}
 for kernel_version  in %{?kernel_versions} ; do
   cp -a src _kmod_build_${kernel_version%%___*}
