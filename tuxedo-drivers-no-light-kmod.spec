@@ -46,9 +46,9 @@ Tuxedo drivers as kmod
 
 %prep
 %setup -q -c -T -a 0
-curl -LO https://github.com/indika-dev/copr-%{name}/archive/refs/tags/%{modname}-no-light-kmod-%{version}-%{release}.tar.gz
+curl -LO https://github.com/indika-dev/copr-%{name}/archive/refs/tags/%{name}-%{version}-%{release}.tar.gz
 mkdir -p %{_sourcedir}
-tar xzf %{modname}-no-light-kmod-%{version}-%{release}.tar.gz --strip-components=1 -C %{_sourcedir}
+tar xzf %{name}-%{version}-%{release}.tar.gz --strip-components=1 -C %{_sourcedir}
 
 %build
 
