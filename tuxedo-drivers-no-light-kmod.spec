@@ -26,8 +26,8 @@ Summary:        Tuxedo drivers not enabling light on touchpad as akmod
 Group:          System Environment/Kernel
 License:        GPL-2.0-or-later
 URL:            https://github.com/tuxedocomputers/tuxedo-drivers
-Source0:        https://github.com/tuxedocomputers/tuxedo-drivers/archive/refs/tags/v4.13.1.tar.gz
-Source1:        https://github.com/indika-dev/copr-%{name}/archive/refs/tags/%{name}-%{version}-%{releasenumber}.tar.gz
+Source0:        https://github.com/indika-dev/copr-%{name}/archive/refs/tags/%{name}-%{version}-%{releasenumber}.tar.gz
+Source1:        https://github.com/tuxedocomputers/tuxedo-drivers/archive/refs/tags/v4.13.1.tar.gz
 # Source0:        tuxedo-drivers-no-light-kmod.spec
 # Source1:        tuxedo-drivers-no-light-kmod.spec.in
 # Source2:        %{modname}-v%{version}.tar.gz
@@ -51,14 +51,15 @@ Tuxedo drivers as kmod
 curl -LO https://github.com/indika-dev/copr-%{name}/archive/refs/tags/%{name}-%{version}-%{releasenumber}.tar.gz
 mkdir -p %{_sourcedir}
 ls -alR %{_sourcedir}
-tar xzf %{name}-%{version}-%{releasenumber}.tar.gz --strip-components=1 -C %{_sourcedir}
+tar xvzf %{name}-%{version}-%{releasenumber}.tar.gz --strip-components=1 -C %{_sourcedir}
+ls -alR %{_sourcedir}
 
 %build
 
 %install
 # copy the spec file for the final akmod to the spec directory
 mkdir -p %{_specdir}
-cp %{_sourcedir}/%{modname}-no-light-kmod.spec.in %{_specdir}/%{modname}-no-light-kmod.spec
+cp %{_sourcedir}/%{modname}-no-light-kmod.spec.in %{_specdir}/%{name}.spec
 
 # generate the akmod with the newly copied spec file
 %{?akmod_install}
