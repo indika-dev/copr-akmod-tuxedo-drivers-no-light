@@ -20,14 +20,14 @@
 
 Name:           %{modname}-no-light-kmod
 Version:        4.13.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Tuxedo drivers not enabling light on touchpad as akmod
 Group:          System Environment/Kernel
 License:        GPL-2.0-or-later
 URL:            https://github.com/tuxedocomputers/tuxedo-drivers
-Source0:        tuxedo-drivers-no-light-kmod.spec
-Source1:        tuxedo-drivers-no-light-kmod.spec.in
-Source2:        %{modname}-v%{version}.tar.gz
+# Source0:        tuxedo-drivers-no-light-kmod.spec
+# Source1:        tuxedo-drivers-no-light-kmod.spec.in
+# Source2:        %{modname}-v%{version}.tar.gz
 
 BuildRequires: kmodtool
 BuildRequires: kernel-devel
@@ -64,6 +64,9 @@ cp %{_sourcedir}/%{name}.spec.in %{_specdir}/%{name}.spec
 %{_usrsrc}/akmods/%{name}.latest
 
 %changelog
+* Fri Mar 20 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-3
+- prepared for initial build by tito
+
 * Fri Mar 20 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-2
 - prepare for initial build (stefan.maassen@posteo.de)
 - prepare for initial build (stefan.maassen@posteo.de)
