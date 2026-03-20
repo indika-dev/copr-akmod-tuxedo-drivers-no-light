@@ -26,6 +26,7 @@ Group:          System Environment/Kernel
 License:        GPL-2.0-or-later
 URL:            https://github.com/tuxedocomputers/tuxedo-drivers
 Source0:        https://github.com/tuxedocomputers/tuxedo-drivers/archive/refs/tags/v4.13.1.tar.gz
+Source1:        https://github.com/indika-dev/copr-%{name}/archive/refs/tags/%{name}-%{version}-$release.tar.gz
 # Source0:        tuxedo-drivers-no-light-kmod.spec
 # Source1:        tuxedo-drivers-no-light-kmod.spec.in
 # Source2:        %{modname}-v%{version}.tar.gz
@@ -46,9 +47,9 @@ Tuxedo drivers as kmod
 
 %prep
 %setup -q -c -T -a 0
-curl -LO https://github.com/indika-dev/copr-%{name}/archive/refs/tags/%{name}-%{version}-%{release}.tar.gz
+curl -LO https://github.com/indika-dev/copr-%{name}/archive/refs/tags/%{name}-%{version}-$release.tar.gz
 mkdir -p %{_sourcedir}
-tar xzf %{name}-%{version}-%{release}.tar.gz --strip-components=1 -C %{_sourcedir}
+tar xzf %{name}-%{version}-$release.tar.gz --strip-components=1 -C %{_sourcedir}
 
 %build
 
