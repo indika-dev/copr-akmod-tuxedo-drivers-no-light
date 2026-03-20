@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-tito tag --use-version 4.13.1
+tito tag --use-release
 git push --follow-tags origin

@@ -1,6 +1,9 @@
 [buildconfig]
-builder = tito.builder.Builder
-tagger = tito.tagger.VersionTagger
+builder = tito.builder.NoTgzBuilder
+tagger = tito.tagger.ReleaseTagger
 changelog_do_not_remove_cherrypick = 0
 changelog_format = %s (%ae)
 
+[version_template]
+destination_file = tuxedo-drivers-no-light-kmod.spec
+template_file = .tito/templates/tuxedo-drivers-no-light-kmod.spec.template
