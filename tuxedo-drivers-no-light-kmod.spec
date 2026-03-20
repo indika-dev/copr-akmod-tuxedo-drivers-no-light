@@ -50,6 +50,7 @@ Tuxedo drivers as kmod
 %setup -q -c -T -a 0
 curl -LO https://github.com/indika-dev/copr-%{name}/archive/refs/tags/%{name}-%{version}-%{releasenumber}.tar.gz
 mkdir -p %{_sourcedir}
+ls -alR %{_sourcedir}
 tar xzf %{name}-%{version}-%{releasenumber}.tar.gz --strip-components=1 -C %{_sourcedir}
 
 %build
@@ -57,7 +58,7 @@ tar xzf %{name}-%{version}-%{releasenumber}.tar.gz --strip-components=1 -C %{_so
 %install
 # copy the spec file for the final akmod to the spec directory
 mkdir -p %{_specdir}
-cp %{_sourcedir}/%{name}.spec.in %{_specdir}/%{name}.spec
+cp %{_sourcedir}/%{modname}-no-light-kmod.spec.in %{_specdir}/%{modname}-no-light-kmod.spec
 
 # generate the akmod with the newly copied spec file
 %{?akmod_install}
