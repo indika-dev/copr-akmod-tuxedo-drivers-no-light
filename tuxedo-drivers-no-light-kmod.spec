@@ -18,9 +18,9 @@
 %global         debug_package           %{nil}
 %endif
 
-Name:           %{modname}-no-light-kmod
+Name:           akmod-%{modname}-no-light
 Version:        4.13.1
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Tuxedo drivers not enabling light on touchpad as akmod
 Group:          System Environment/Kernel
 License:        GPL-2.0-or-later
@@ -46,13 +46,9 @@ Tuxedo drivers as kmod
 
 %prep
 %setup -q -c -T -a 0
-echo ====================
-echo $PWD
-ls -alR
-echo ====================
-curl -LO https://github.com/indika-dev/copr-akmod-tuxedo-drivers-no-light/archive/refs/tags/tuxedo-drivers-no-light-kmod-4.13.1-5.tar.gz
+curl -LO https://github.com/indika-dev/copr-%{name}/archive/refs/tags/%{modname}-no-light-kmod-%{version}-%{release}.tar.gz
 mkdir -p %{_sourcedir}
-tar xzf tuxedo-drivers-no-light-kmod-4.13.1-5.tar.gz --strip-components=1 -C %{_sourcedir}
+tar xzf %{modname}-no-light-kmod-%{version}-%{release}.tar.gz --strip-components=1 -C %{_sourcedir}
 
 %build
 
@@ -69,6 +65,9 @@ cp %{_sourcedir}/%{name}.spec.in %{_specdir}/%{name}.spec
 %{_usrsrc}/akmods/%{name}.latest
 
 %changelog
+* Fri Mar 20 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-6
+- new package built with tito
+
 * Fri Mar 20 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-5
 - prepare for initial build by tito
 
