@@ -6,6 +6,7 @@
 %global         AkmodsBuildRequires     make gcc sed gawk
 
 %define no-git-info %(echo "")
+%define releasenumber %(echo %{release} | grep -o '[0-9]*' | head -1 )
 # extract all chars from "git" until next point or the end is reached
 %define git_suffix %(echo %{release} | grep -o 'git\.[0-9]*\.[a-z0-9]*')
 # extract only hash
@@ -26,7 +27,7 @@ Group:          System Environment/Kernel
 License:        GPL-2.0-or-later
 URL:            https://github.com/tuxedocomputers/tuxedo-drivers
 Source0:        https://github.com/tuxedocomputers/tuxedo-drivers/archive/refs/tags/v4.13.1.tar.gz
-Source1:        https://github.com/indika-dev/copr-%{name}/archive/refs/tags/%{name}-%{version}-$release.tar.gz
+Source1:        https://github.com/indika-dev/copr-%{name}/archive/refs/tags/%{name}-%{version}-%{releasenumber}.tar.gz
 # Source0:        tuxedo-drivers-no-light-kmod.spec
 # Source1:        tuxedo-drivers-no-light-kmod.spec.in
 # Source2:        %{modname}-v%{version}.tar.gz
@@ -47,10 +48,9 @@ Tuxedo drivers as kmod
 
 %prep
 %setup -q -c -T -a 0
-ls -alR %{_sourcedir}
-curl -LO https://github.com/indika-dev/copr-%{name}/archive/refs/tags/%{name}-%{version}-$release.tar.gz
+curl -LO https://github.com/indika-dev/copr-%{name}/archive/refs/tags/%{name}-%{version}-%{releasenumber}.tar.gz
 mkdir -p %{_sourcedir}
-tar xzf %{name}-%{version}-$release.tar.gz --strip-components=1 -C %{_sourcedir}
+tar xzf %{name}-%{version}-%{releasenumber}.tar.gz --strip-components=1 -C %{_sourcedir}
 
 %build
 
@@ -67,6 +67,9 @@ cp %{_sourcedir}/%{name}.spec.in %{_specdir}/%{name}.spec
 %{_usrsrc}/akmods/%{name}.latest
 
 %changelog
+* Fri Mar 20 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-8
+- prepare for initial build (stefan.maassen@posteo.de)
+
 * Fri Mar 20 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-7
 - prepare for initial build (stefan.maassen@posteo.de)
 - prepare for initial build (stefan.maassen@posteo.de)
