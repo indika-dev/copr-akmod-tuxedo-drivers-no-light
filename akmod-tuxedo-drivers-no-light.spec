@@ -66,8 +66,8 @@ echo "Install stage ------------------------------------------------------------
 
 for kernel_version in %{?kernel_versions}; do
   mkdir -p %{buildroot}/lib/modules/${kernel_version%%___*}/extra/%{modname}-no-light/
-  install -D -m 755 %{modname}-%{version}/_kmod_build_${kernel_version%%___*}/**/*.ko %{buildroot}/lib/modules/${kernel_version%%___*}/extra/%{modname}-no-light/
-  install -D -m 755 %{modname}-%{version}/_kmod_build_${kernel_version%%___*}/*.ko %{buildroot}/lib/modules/${kernel_version%%___*}/extra/%{modname}-no-light/
+  install -D -m 755 %{modname}-v%{version}/_kmod_build_${kernel_version%%___*}/**/*.ko %{buildroot}/lib/modules/${kernel_version%%___*}/extra/%{modname}-no-light/
+  install -D -m 755 %{modname}-v%{version}/_kmod_build_${kernel_version%%___*}/*.ko %{buildroot}/lib/modules/${kernel_version%%___*}/extra/%{modname}-no-light/
   chmod a+x %{buildroot}/lib/modules/${kernel_version%%___*}/extra/%{modname}-no-light/*.ko
 done
 
@@ -85,13 +85,13 @@ mkdir -p %{buildroot}/usr/lib/modprobe.d/
 # Copy udev rules
 mkdir -p %{buildroot}/usr/lib/udev/rules.d/
 ls -al
-cp %{modname}-%{version}/99-infinityflex-touchpanel-toggle.rules %{buildroot}/usr/lib/udev/rules.d/
-cp %{modname}-%{version}/99-z-tuxedo-systemd-fix.rules %{buildroot}/usr/lib/udev/rules.d/
+cp %{modname}-v%{version}/99-infinityflex-touchpanel-toggle.rules %{buildroot}/usr/lib/udev/rules.d/
+cp %{modname}-v%{version}/99-z-tuxedo-systemd-fix.rules %{buildroot}/usr/lib/udev/rules.d/
 
 # Copy udev hwdb
 mkdir -p %{buildroot}/usr/lib/udev/hwdb.d/
-cp %{modname}-%{version}/61-sensor-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
-cp %{modname}-%{version}/61-keyboard-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
+cp %{modname}-v%{version}/61-sensor-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
+cp %{modname}-v%{version}/61-keyboard-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
 
 %{?akmod_install}
 
