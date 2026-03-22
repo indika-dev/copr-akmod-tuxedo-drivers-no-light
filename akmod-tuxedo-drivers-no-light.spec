@@ -39,11 +39,10 @@ echo =========================
 echo $PWD
 ls -alR
 echo =========================
-cd %{modname}-%{version}
+cd %{modname}-v%{version}
 for kernel_version  in %{?kernel_versions} ; do
   cp -a src _kmod_build_${kernel_version%%___*}
 done
-cd ..
 
 %build
 echo "Build stage -----------------------------------------------------------------------------------------------"

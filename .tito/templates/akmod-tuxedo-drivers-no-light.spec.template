@@ -39,11 +39,10 @@ echo =========================
 echo $PWD
 ls -alR
 echo =========================
-cd %{modname}-%{version}
+cd %{modname}-v%{version}
 for kernel_version  in %{?kernel_versions} ; do
   cp -a src _kmod_build_${kernel_version%%___*}
 done
-cd ..
 
 %build
 echo "Build stage -----------------------------------------------------------------------------------------------"
@@ -105,6 +104,9 @@ cp %{modname}-%{version}/61-keyboard-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.
 # %license debian/copyright
 
 %changelog
+* Sun Mar 22 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-10
+- prepare for initial build (stefan.maassen@posteo.de)
+
 * Sun Mar 22 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-9
 - prepare for initial build (stefan.maassen@posteo.de)
 - prepare for initial build (stefan.maassen@posteo.de)
