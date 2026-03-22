@@ -35,14 +35,23 @@ Tuxedo drivers as kmod
 %prep
 echo "Prepare stage -----------------------------------------------------------------------------------------------"
 %setup -q -c -T -a 0
+echo =========================
+echo $PWD
+ls -alR
+echo =========================
 cd %{modname}-%{version}
 for kernel_version  in %{?kernel_versions} ; do
   cp -a src _kmod_build_${kernel_version%%___*}
 done
+cd ..
 
 %build
 echo "Build stage -----------------------------------------------------------------------------------------------"
 
+echo =========================
+echo $PWD
+ls -alR
+echo =========================
 for kernel_version in %{?kernel_versions}; do
   make V=1 %{?_smp_mflags} -C /lib/modules/${kernel_version%%___*}/build M=${PWD}/%{modname}-%{version}/_kmod_build_${kernel_version%%___*} modules
 done
