@@ -4,7 +4,7 @@
 
 Name:           tuxedo-drivers-no-light
 Version:        4.13.1
-Release:        36%{?dist}
+Release:        37%{?dist}
 Summary:        Tuxedo drivers akmod (no light version)
 License:        GPL-2.0-or-later
 URL:            https://gitlab.com%{modname}
