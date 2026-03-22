@@ -26,7 +26,7 @@ Summary:        Tuxedo drivers not enabling light on touchpad as akmod
 Group:          System Environment/Kernel
 License:        GPL-2.0-or-later
 URL:            https://github.com/tuxedocomputers/tuxedo-drivers
-Source0:        https://github.com/indika-dev/copr-%{name}/archive/refs/tags/%{name}-%{version}-%{releasenumber}.tar.gz
+Source0:        https://github.com/indika-dev/copr-akmod-%{name}/archive/refs/tags/%{name}-%{version}-%{releasenumber}.tar.gz
 Source1:        https://github.com/tuxedocomputers/tuxedo-drivers/archive/refs/tags/v4.13.1.tar.gz
 # Source0:        tuxedo-drivers-no-light-kmod.spec
 # Source1:        tuxedo-drivers-no-light-kmod.spec.in
