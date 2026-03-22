@@ -19,6 +19,7 @@ URL:            https://gitlab.com/tuxedocomputers/development/packages/%{modnam
 
 Source:         %{url}/-/archive/v%{version}/tuxedo-drivers-v%{version}.tar.gz
 
+BuildArch: noarch
 BuildRequires: kmodtool
 BuildRequires: kernel-devel
 BuildRequires: make
@@ -100,6 +101,7 @@ cp %{modname}-v%{version}/61-keyboard-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb
 /usr/lib/udev/rules.d/99-z-tuxedo-systemd-fix.rules
 /usr/lib/udev/hwdb.d/61-sensor-tuxedo.hwdb
 /usr/lib/udev/hwdb.d/61-keyboard-tuxedo.hwdb
+%{_usrsrc}/akmods/*
 # %doc README.md
 # %license debian/copyright
 
