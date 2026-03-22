@@ -60,7 +60,7 @@ ls -alR %{_sourcedir}
 # copy the spec file for the final akmod to the spec directory
 mkdir -p %{_specdir}
 cp %{_sourcedir}/%{modname}-no-light-kmod.spec.in %{_specdir}/%{name}.spec
-cp %{_sourcedir}/%{modname}-v%{version}.tar.gz %{_specdir}/%{name}.spec
+cp %{_sourcedir}/%{modname}-v%{version}.tar.gz %{buildroot}%{_usrsrc}/akmods/
 
 # generate the akmod with the newly copied spec file
 %{?akmod_install}
