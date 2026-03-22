@@ -61,7 +61,6 @@ ls -alR %{_sourcedir}
 mkdir -p %{_specdir}
 mkdir -p %{buildroot}%{_usrsrc}/akmods/
 cp %{_sourcedir}/%{modname}-no-light-kmod.spec.in %{_specdir}/%{name}.spec
-cp %{_sourcedir}/%{modname}-v%{version}.tar.gz %{buildroot}%{_usrsrc}/akmods/
 
 # generate the akmod with the newly copied spec file
 %{?akmod_install}
@@ -71,6 +70,7 @@ pushd %{buildroot}%{_usrsrc}/akmods/
   NEW_SRPM=$(ls *.src.rpm | head -n 1)
   # Erstellt den Softlink (z.B. tuxedo-drivers.latest -> ...)
   ln -s "$NEW_SRPM" %{name}.latest
+  cp %{_sourcedir}/%{modname}-v%{version}.tar.gz %{buildroot}%{_usrsrc}/akmods/
 popd
 
 %files
