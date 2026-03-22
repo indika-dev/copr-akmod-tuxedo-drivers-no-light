@@ -1,148 +1,67 @@
 %global         modname                 tuxedo-drivers
-%global         _sysconf_modprobe_d     %{_sysconfdir}/modprobe.d/
 %global         buildforkernels         akmod
-%global         AkmodsBuildRequires     make gcc sed gawk
-%global short tuxedo-drivers
-%global module_names tuxedo_compatibility_check tuxedo_keyboard clevo_acpi clevo_wmi uniwill_wmi tuxedo_io tuxedo_nb02_nvidia_power_ctrl ite_8291 ite_8291_lb ite_8297 ite_829x tuxedo_nb05_ec tuxedo_nb05_power_profiles tuxedo_nb05_sensors tuxedo_nb05_keyboard tuxedo_nb05_kbd_backlight tuxedo_nb05_fan_control tuxedo_nb04_keyboard tuxedo_nb04_wmi_ab tuxedo_nb04_wmi_bs tuxedo_nb04_sensors tuxedo_nb04_power_profiles tuxedo_nb04_kbd_backlight stk8321 gxtp7380 tuxedo_tuxi_fan_control tuxi_acpi
-
-%if 0%{?fedora}
 %global         debug_package           %{nil}
-%endif
 
 Name:           %{modname}-no-light
 Version:        4.13.1
 Release:        $release%{?dist}
-Summary:        Tuxedo drivers not enabling light on touchpad as akmod
-Group:          System Environment/Kernel
+Summary:        Tuxedo drivers akmod (no light version)
 License:        GPL-2.0-or-later
-URL:            https://gitlab.com/tuxedocomputers/development/packages/%{modname}
+URL:            https://gitlab.com%{modname}
 
-Source:         %{url}/-/archive/v%{version}/tuxedo-drivers-v%{version}.tar.gz
+# WICHTIG: Ein Akmod ist plattformunabhängig (enthält nur Sourcen)
+BuildArch:      noarch
 
-BuildArch: noarch
-BuildRequires: kmodtool
-BuildRequires: kernel-devel
-BuildRequires: make
-BuildRequires: gcc
+Source0:        %{url}/-/archive/v%{version}/tuxedo-drivers-v%{version}.tar.gz
+Source1:        tuxedo-drivers-no-light-kmod.spec
 
-Provides: %{modname}-no-light = %{version}
-Obsoletes: %{modname}-no-light < 4.0.0
+BuildRequires:  kmodtool
+# Diese werden benötigt, damit das Akmod auf dem Zielsystem bauen kann
+Requires:       akmods
+Requires:       %{name}-common = %{version}-%{release}
+
+# Dynamische Erstellung der Akmod-Paketbeschreibungen
+%{expand:%(kmodtool --target %{_target_cpu} --kmodname %{name} %{?buildforkernels:--%{buildforkernels}} 2>/dev/null) }
 
 %description
-Tuxedo drivers as kmod
+Tuxedo drivers as akmod package.
 
-%{expand:%(kmodtool --target %{_target_cpu} --kmodname %{name} %{?buildforkernels:--%{buildforkernels}} %{?kernels:--for-kernels "%{?kernels}"} 2>/dev/null) }
+%package common
+Summary:  Common configuration files for Tuxedo drivers
+%description common
+Contains udev rules and hwdb configurations.
 
 %prep
-echo "Prepare stage -----------------------------------------------------------------------------------------------"
-%setup -q -c -T -a 0
-echo =========================
-echo $PWD
-ls -alR
-echo =========================
-cd %{modname}-v%{version}
-for kernel_version  in %{?kernel_versions} ; do
-  cp -a src _kmod_build_${kernel_version%%___*}
-done
+%setup -q -n %{modname}-v%{version}
 
 %build
-echo "Build stage -----------------------------------------------------------------------------------------------"
-
-echo =========================
-echo $PWD
-ls -alR
-echo =========================
-for kernel_version in %{?kernel_versions}; do
-  make V=1 %{?_smp_mflags} -C /lib/modules/${kernel_version%%___*}/build M=${PWD}/%{modname}-%{version}/_kmod_build_${kernel_version%%___*} modules
-done
-
-# build for common
-for module in %{module_names}; do
-  echo "$module" > ${module}.conf
-  install -D -m 0644 ${module}.conf %{buildroot}%{_modulesloaddir}/${module}.conf
-done
+# Bei einem Akmod wird im Copr-Build nichts kompiliert!
 
 %install
-echo "Install stage ---------------------------------------------------------------------------------------------"
+# 1. Akmod-Sourcen vorbereiten
+mkdir -p %{buildroot}%{_usrsrc}/akmods/
+cp %{SOURCE0} %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}.tar.gz
+# Kopiere das Child-SPEC (Steuerungsdatei)
+cp %{SOURCE1} %{buildroot}%{_usrsrc}/akmods/%{modname}-kmod.spec
 
-for kernel_version in %{?kernel_versions}; do
-  mkdir -p %{buildroot}/lib/modules/${kernel_version%%___*}/extra/%{modname}-no-light/
-  install -D -m 755 %{modname}-v%{version}/_kmod_build_${kernel_version%%___*}/**/*.ko %{buildroot}/lib/modules/${kernel_version%%___*}/extra/%{modname}-no-light/
-  install -D -m 755 %{modname}-v%{version}/_kmod_build_${kernel_version%%___*}/*.ko %{buildroot}/lib/modules/${kernel_version%%___*}/extra/%{modname}-no-light/
-  chmod a+x %{buildroot}/lib/modules/${kernel_version%%___*}/extra/%{modname}-no-light/*.ko
-done
+# 2. udev & hwdb Files (deine Logik)
+mkdir -p %{buildroot}%{_udevrulesdir}
+mkdir -p %{buildroot}%{_udevhwdbdir}
 
-# install for common
-mkdir -p %{buildroot}%{_modulesloaddir}
-for module in %{module_names}; do
-    echo "$module" > ${module}.conf
-    install -D -m 0644 ${module}.conf %{buildroot}%{_modulesloaddir}/${module}.conf
-done
+cp 99-infinityflex-touchpanel-toggle.rules %{buildroot}%{_udevrulesdir}/
+cp 99-z-tuxedo-systemd-fix.rules %{buildroot}%{_udevrulesdir}/
+cp 61-sensor-tuxedo.hwdb %{buildroot}%{_udevhwdbdir}/
+cp 61-keyboard-tuxedo.hwdb %{buildroot}%{_udevhwdbdir}/
 
-
-# Copy configs
-mkdir -p %{buildroot}/usr/lib/modprobe.d/
-
-# Copy udev rules
-mkdir -p %{buildroot}/usr/lib/udev/rules.d/
-ls -al
-cp %{modname}-v%{version}/99-infinityflex-touchpanel-toggle.rules %{buildroot}/usr/lib/udev/rules.d/
-cp %{modname}-v%{version}/99-z-tuxedo-systemd-fix.rules %{buildroot}/usr/lib/udev/rules.d/
-
-# Copy udev hwdb
-mkdir -p %{buildroot}/usr/lib/udev/hwdb.d/
-cp %{modname}-v%{version}/61-sensor-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
-cp %{modname}-v%{version}/61-keyboard-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
-
+# 3. Akmod Steuerungs-Dateien generieren
 %{?akmod_install}
 
 %files
-/usr/lib/udev/rules.d/99-infinityflex-touchpanel-toggle.rules
-/usr/lib/udev/rules.d/99-z-tuxedo-systemd-fix.rules
-/usr/lib/udev/hwdb.d/61-sensor-tuxedo.hwdb
-/usr/lib/udev/hwdb.d/61-keyboard-tuxedo.hwdb
-%{_usrsrc}/akmods/*
-# %doc README.md
-# %license debian/copyright
-
-%changelog
-* Sun Mar 22 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-31
-- prepare for initial build (stefan.maassen@posteo.de)
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Sun Mar 22 2026 Stefan Maaßen <stefan.maassen@posteo.de>
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Sun Mar 22 2026 Stefan Maaßen <stefan.maassen@posteo.de>
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Sun Mar 22 2026 Stefan Maaßen <stefan.maassen@posteo.de>
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Sun Mar 22 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-12
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Sun Mar 22 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-11
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Sun Mar 22 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-10
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Sun Mar 22 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-9
-- prepare for initial build (stefan.maassen@posteo.de)
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Sun Mar 22 2026 Stefan Maaßen <stefan.maassen@posteo.de>
-- prepare for initial build (stefan.maassen@posteo.de)
-
-
-%package common
-Summary:  Tuxedo drivers kmod common files
-Requires: %{modname}-no-light-kmod >= %{version}
-BuildRequires: systemd-rpm-macros
-
-%description common
-Tuxedo drivers kmod common files
+# Das Hauptpaket kann leer sein oder Metadaten enthalten
 
 %files common
-%{_modulesloaddir}/*.conf
+%{_udevrulesdir}/*.rules
+%{_udevhwdbdir}/*.hwdb
+
+%files -n akmod-%{name}
+%{_usrsrc}/akmods/*
