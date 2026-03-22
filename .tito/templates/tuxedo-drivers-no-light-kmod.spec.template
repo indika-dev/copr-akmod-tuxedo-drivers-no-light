@@ -19,7 +19,7 @@
 %global         debug_package           %{nil}
 %endif
 
-Name:           akmod-%{modname}-no-light
+Name:           %{modname}-no-light
 Version:        4.13.1
 Release:        $release%{?dist}
 Summary:        Tuxedo drivers not enabling light on touchpad as akmod
@@ -76,6 +76,9 @@ popd
 %{_usrsrc}/akmods/%{name}.latest
 
 %changelog
+* Fri Mar 20 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-12
+- prepare for initial build (stefan.maassen@posteo.de)
+
 * Fri Mar 20 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-11
 - prepare for initial build (stefan.maassen@posteo.de)
 
