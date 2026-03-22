@@ -58,7 +58,7 @@ ls -alR %{_sourcedir}
 mkdir -p %{_specdir}
 mkdir -p %{buildroot}%{_usrsrc}/akmods/
 # cp %{_sourcedir}/%{name}-kmod.spec.in %{_specdir}/%{name}.spec
-cp %{_sourcedir}/%{name}-kmod.spec.in %{buildroot}%{_usrsrc}/akmods/%{name}.spec
+cp %{_sourcedir}/%{name}-kmod.spec.in %{buildroot}%{_usrsrc}/akmods/%{name}-kmod.spec
 cp %{_sourcedir}/%{modname}-v%{version}.tar.gz %{buildroot}%{_usrsrc}/akmods/
 
 # generate the akmod with the newly copied spec file
@@ -67,7 +67,7 @@ cp %{_sourcedir}/%{modname}-v%{version}.tar.gz %{buildroot}%{_usrsrc}/akmods/
 %files
 %{_usrsrc}/akmods/*.src.rpm
 %{_usrsrc}/akmods/%{name}.latest
-%{_usrsrc}/akmods/%{name}.spec
+%{_usrsrc}/akmods/%{name}-kmod.spec
 
 %changelog
 * Sun Mar 22 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-22
