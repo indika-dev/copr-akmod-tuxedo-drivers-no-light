@@ -48,7 +48,7 @@ Tuxedo drivers as kmod
 
 %prep
 %setup -q -c -T -a 0
-curl -LO https://github.com/indika-dev/copr-%{name}/archive/refs/tags/%{name}-%{version}-%{releasenumber}.tar.gz
+curl -LO https://github.com/indika-dev/copr-akmod-%{name}/archive/refs/tags/%{name}-%{version}-%{releasenumber}.tar.gz
 mkdir -p %{_sourcedir}
 ls -alR %{_sourcedir}
 tar xvzf %{name}-%{version}-%{releasenumber}.tar.gz --strip-components=1 -C %{_sourcedir}
