@@ -63,5 +63,11 @@ cp 61-keyboard-tuxedo.hwdb %{buildroot}%{_udevhwdbdir}/
 %{_udevrulesdir}/*.rules
 %{_udevhwdbdir}/*.hwdb
 
-%files -n akmod-%{name}
+%files -n akmod-tuxedo-drivers-no-light
 %{_usrsrc}/akmods/*
+
+%files tuxedo-drivers-no-light-kmod
+%{modname}-%{version}.tar.gz
+%{name}-kmod.spec
+
+%files tuxedo-drivers-no-light
