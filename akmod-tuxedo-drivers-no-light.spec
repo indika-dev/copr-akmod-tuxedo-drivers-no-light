@@ -11,7 +11,7 @@
 
 Name:           %{modname}-no-light
 Version:        4.13.1
-Release:        9%{?dist}
+Release:        10%{?dist}
 Summary:        Tuxedo drivers not enabling light on touchpad as akmod
 Group:          System Environment/Kernel
 License:        GPL-2.0-or-later
@@ -105,6 +105,9 @@ cp %{modname}-%{version}/61-keyboard-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.
 # %license debian/copyright
 
 %changelog
+* Sun Mar 22 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-10
+- prepare for initial build (stefan.maassen@posteo.de)
+
 * Sun Mar 22 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-9
 - prepare for initial build (stefan.maassen@posteo.de)
 - prepare for initial build (stefan.maassen@posteo.de)
