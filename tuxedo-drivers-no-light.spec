@@ -33,7 +33,7 @@ Summary:  Common configuration files for Tuxedo drivers
 Contains udev rules and hwdb configurations.
 
 %prep
-%setup -q -n %{modname}-v%{version}
+%setup -q -n %{modname}-%{version}
 
 %build
 # Bei einem Akmod wird im Copr-Build nichts kompiliert!
