@@ -1,8 +1,9 @@
 # Diese Datei wird von akmods auf dem Zielrechner genutzt
+%global modname tuxedo-drivers
 %global buildforkernels akmod
 %global debug_package %{nil}
 
-Name:           tuxedo-drivers-no-light
+Name:           tuxedo-drivers-no-light-kmod
 Version:        4.13.1
 Release:        1%{?dist}
 Summary:        Kernel module for Tuxedo Drivers
@@ -32,4 +33,4 @@ done
 
 %files
 /%{_usrsrc}/akmods/%{modname}-%{version}
-/%{_usrsrc}/akmods/%{name}-kmod.spec
+/%{_usrsrc}/akmods/%{name}.spec
