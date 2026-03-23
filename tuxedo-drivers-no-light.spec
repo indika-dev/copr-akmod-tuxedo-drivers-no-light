@@ -40,7 +40,7 @@ Contains udev rules and hwdb configurations.
 
 %install
 # 1. Akmod-Sourcen vorbereiten
-mkdir -p %{buildroot}%{_usrsrc}/akmods/
+mkdir -p %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
 # Kopiere das Child-SPEC (Steuerungsdatei)
 cp %{SOURCE1} %{_specdir}/%{name}-kmod.spec
 tar xzf %{SOURCE0} --strip-components=1 -C %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
