@@ -4,7 +4,7 @@
 
 %define releasenumber %(echo %{release} | grep -o '[0-9]*' | head -1 )
 
-Name:           akmod-tuxedo-drivers-no-light
+Name:           tuxedo-drivers-no-light
 Version:        4.13.1
 Release:        61%{?dist}
 Summary:        Tuxedo drivers akmod (no light version)
@@ -42,7 +42,7 @@ Contains udev rules and hwdb configurations.
 # 1. Akmod-Sourcen vorbereiten
 mkdir -p %{buildroot}%{_usrsrc}/akmods
 # Kopiere das Child-SPEC (Steuerungsdatei)
-cp %{SOURCE1} %{_specdir}/%{name}.spec
+cp %{SOURCE1} %{_specdir}/akmod-%{name}.spec
 
 # 2. udev & hwdb Files (deine Logik)
 mkdir -p %{buildroot}/usr/lib/udev/rules.d/
