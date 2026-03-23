@@ -63,7 +63,7 @@ Summary:  Common configuration files for Tuxedo drivers
 Contains udev rules and hwdb configurations.
 
 %files common
-%{_modulesloaddir}/*.conf
+/%{_modulesloaddir}/*.conf
 /usr/lib/udev/rules.d/*.rules
 /usr/lib/udev/hwdb.d/*.hwdb
 
