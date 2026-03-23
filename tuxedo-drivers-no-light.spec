@@ -60,7 +60,7 @@ tar xzf %{SOURCE0} --strip-components=1 -C %{buildroot}%{_usrsrc}/akmods/%{modna
 
 %files
 /%{_usrsrc}/akmods/%{name}-%{version}-%{release}.src.rpm
-/%{_udevrulesdir}/*.rules
-/%{_udevhwdbdir}/*.hwdb
+/usr/lib/udev/rules.d/*.rules
+/usr/lib/udev/hwdb.d/*.hwdb
 
 
