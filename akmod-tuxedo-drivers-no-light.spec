@@ -38,17 +38,6 @@ mkdir -p %{buildroot}%{_usrsrc}/akmods
 # Kopiere das Child-SPEC (Steuerungsdatei)
 cp %{SOURCE1} %{_specdir}/%{name}.spec
 
-# 2. udev & hwdb Files (deine Logik)
-mkdir -p %{buildroot}/usr/lib/udev/rules.d/
-mkdir -p %{buildroot}/usr/lib/udev/hwdb.d/
-mkdir -p %{buildroot}/etc/modules-load.d/
-
-install -D -m 644 tuxedo_keyboard.conf %{buildroot}/etc/modules-load.d/tuxedo_keyboard.conf
-install -D -m 644 99-infinityflex-touchpanel-toggle.rules %{buildroot}/usr/lib/udev/rules.d/
-install -D -m 644 99-z-tuxedo-systemd-fix.rules %{buildroot}/usr/lib/udev/rules.d/
-install -D -m 644 61-sensor-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
-install -D -m 644 61-keyboard-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
-
 # 3. Akmod Steuerungs-Dateien generieren
 %{?akmod_install}
 mkdir -p %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
@@ -56,7 +45,4 @@ tar xzf %{SOURCE0} --strip-components=1 -C %{buildroot}%{_usrsrc}/akmods/%{modna
 
 %files
 /%{_usrsrc}/akmods/%{name}-kmod-%{version}-1%{dist}.src.rpm
-/etc/modules-load.d/*.conf
-/usr/lib/udev/rules.d/*.rules
-/usr/lib/udev/hwdb.d/*.hwdb
 
