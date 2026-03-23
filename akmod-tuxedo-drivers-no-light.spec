@@ -42,8 +42,9 @@ cp %{SOURCE1} %{_specdir}/%{name}.spec
 # 2. udev & hwdb Files (deine Logik)
 mkdir -p %{buildroot}/usr/lib/udev/rules.d/
 mkdir -p %{buildroot}/usr/lib/udev/hwdb.d/
+mkdir -p %{buildroot}/etc/modules-load.d/
 
-install -D -m 644 tuxedo_keyboard.conf %{_modulesloaddir}/tuxedo_keyboard.conf
+install -D -m 644 tuxedo_keyboard.conf %{buildroot}/etc/modules-load.d/tuxedo_keyboard.conf
 install -D -m 644 99-infinityflex-touchpanel-toggle.rules %{buildroot}/usr/lib/udev/rules.d/
 install -D -m 644 99-z-tuxedo-systemd-fix.rules %{buildroot}/usr/lib/udev/rules.d/
 install -D -m 644 61-sensor-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
@@ -63,7 +64,7 @@ Summary:  Common configuration files for Tuxedo drivers
 Contains udev rules and hwdb configurations.
 
 %files common
-/%{_modulesloaddir}/*.conf
+/etc/modules-load.d/*.conf
 /usr/lib/udev/rules.d/*.rules
 /usr/lib/udev/hwdb.d/*.hwdb
 
