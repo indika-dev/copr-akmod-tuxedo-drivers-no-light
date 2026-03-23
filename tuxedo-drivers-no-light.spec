@@ -2,18 +2,19 @@
 %global         buildforkernels         akmod
 %global         debug_package           %{nil}
 
+%define releasenumber %(echo %{release} | grep -o '[0-9]*' | head -1 )
+
 Name:           tuxedo-drivers-no-light
 Version:        4.13.1
 Release:        37%{?dist}
 Summary:        Tuxedo drivers akmod (no light version)
 License:        GPL-2.0-or-later
-URL:            https://gitlab.com%{modname}
+URL:            https://github.com/indika-dev/copr-akmod-tuxedo-drivers-no-light
 
 # WICHTIG: Ein Akmod ist plattformunabhängig (enthält nur Sourcen)
 BuildArch:      noarch
-
-Source0:        %{url}/-/archive/v%{version}/tuxedo-drivers-v%{version}.tar.gz
-Source1:        tuxedo-drivers-no-light-kmod.spec
+Source0:        %{url}/blob/main/%{modname}-v%{version}.tar.gz
+Source1:        tuxedo-drivers-no-light-kmod.spec.in
 
 BuildRequires:  kmodtool
 # Diese werden benötigt, damit das Akmod auf dem Zielsystem bauen kann
@@ -40,9 +41,9 @@ Contains udev rules and hwdb configurations.
 %install
 # 1. Akmod-Sourcen vorbereiten
 mkdir -p %{buildroot}%{_usrsrc}/akmods/
-cp %{SOURCE0} %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}.tar.gz
+cp %{SOURCE0} %{buildroot}%{_usrsrc}/akmods/%{modname}-v%{version}.tar.gz
 # Kopiere das Child-SPEC (Steuerungsdatei)
-cp %{SOURCE1} %{buildroot}%{_usrsrc}/akmods/%{modname}-kmod.spec
+cp %{SOURCE1} %{buildroot}%{_usrsrc}/akmods/%{name}-kmod.spec
 
 # 2. udev & hwdb Files (deine Logik)
 mkdir -p %{buildroot}%{_udevrulesdir}
@@ -56,18 +57,10 @@ cp 61-keyboard-tuxedo.hwdb %{buildroot}%{_udevhwdbdir}/
 # 3. Akmod Steuerungs-Dateien generieren
 %{?akmod_install}
 
-%files
-# Das Hauptpaket kann leer sein oder Metadaten enthalten
-
 %files common
 %{_udevrulesdir}/*.rules
 %{_udevhwdbdir}/*.hwdb
 
-%files -n akmod-tuxedo-drivers-no-light
+%files
 %{_usrsrc}/akmods/*
 
-%files tuxedo-drivers-no-light-kmod
-%{modname}-%{version}.tar.gz
-%{name}-kmod.spec
-
-%files tuxedo-drivers-no-light

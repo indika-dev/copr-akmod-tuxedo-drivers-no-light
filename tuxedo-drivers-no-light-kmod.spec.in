@@ -31,3 +31,7 @@ for kernel_version in %{?kernel_versions}; do
     for item in $$(find . -type d -name *.ko) ; do install $${item} -D -m 755 %{buildroot}/lib/modules/${kernel_version%%___*}/extra/tuxedo-drivers/ ; done
 done
 %{?akmod_install}
+
+%files
+%{modname}-%{version}.tar.gz
+%{name}-kmod.spec
