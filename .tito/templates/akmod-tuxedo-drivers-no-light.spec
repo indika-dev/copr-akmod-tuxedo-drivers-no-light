@@ -19,7 +19,6 @@ Source1:        tuxedo-drivers-no-light-kmod.spec.in
 BuildRequires:  kmodtool
 # Diese werden benötigt, damit das Akmod auf dem Zielsystem bauen kann
 Requires:       akmods
-Requires:       %{name}-common = %{version}-%{release}
 
 # Dynamische Erstellung der Akmod-Paketbeschreibungen
 %{expand:%(kmodtool --target %{_target_cpu} --kmodname %{name} %{?buildforkernels:--%{buildforkernels}} 2>/dev/null) }
@@ -57,25 +56,7 @@ tar xzf %{SOURCE0} --strip-components=1 -C %{buildroot}%{_usrsrc}/akmods/%{modna
 
 %files
 /%{_usrsrc}/akmods/%{name}-kmod-%{version}-1%{dist}.src.rpm
-
-%package common
-Summary:  Common configuration files for Tuxedo drivers
-%description common
-Contains udev rules and hwdb configurations.
-
-%files common
 /etc/modules-load.d/*.conf
 /usr/lib/udev/rules.d/*.rules
 /usr/lib/udev/hwdb.d/*.hwdb
-
-%changelog common
-* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-67
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Mon Mar 23 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-66
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Mon Mar 23 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-65
-- prepare for initial build (stefan.maassen@posteo.de)
-- prepare for initial build (stefan.maassen@posteo.de)
 
