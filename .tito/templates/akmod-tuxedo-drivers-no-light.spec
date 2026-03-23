@@ -42,7 +42,7 @@ Contains udev rules and hwdb configurations.
 # 1. Akmod-Sourcen vorbereiten
 mkdir -p %{buildroot}%{_usrsrc}/akmods
 # Kopiere das Child-SPEC (Steuerungsdatei)
-cp %{SOURCE1} %{_specdir}/akmod-%{name}.spec
+cp %{SOURCE1} %{_specdir}/%{name}.spec
 
 # 2. udev & hwdb Files (deine Logik)
 mkdir -p %{buildroot}/usr/lib/udev/rules.d/
