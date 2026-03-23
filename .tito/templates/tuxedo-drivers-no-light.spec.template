@@ -13,7 +13,7 @@ URL:            https://github.com/indika-dev/copr-akmod-tuxedo-drivers-no-light
 
 # WICHTIG: Ein Akmod ist plattformunabhängig (enthält nur Sourcen)
 BuildArch:      noarch
-Source0:        %{url}/blob/main/%{modname}-v%{version}.tar.gz
+Source0:        https://github.com/tuxedocomputers/tuxedo-drivers/archive/refs/tags/v4.13.1.tar.gz
 Source1:        tuxedo-drivers-no-light-kmod.spec.in
 
 BuildRequires:  kmodtool
