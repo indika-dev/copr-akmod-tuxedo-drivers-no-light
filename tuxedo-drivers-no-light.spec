@@ -62,5 +62,5 @@ cp 61-keyboard-tuxedo.hwdb %{buildroot}%{_udevhwdbdir}/
 %{_udevhwdbdir}/*.hwdb
 
 %files
-%{_usrsrc}/akmods/*
+%{_usrsrc}/akmods/%{name}-%{version}-${release}.src.rpm
 
