@@ -43,7 +43,7 @@ Contains udev rules and hwdb configurations.
 mkdir -p %{buildroot}%{_usrsrc}/akmods/
 cp %{SOURCE0} %{buildroot}%{_usrsrc}/akmods/%{modname}-v%{version}.tar.gz
 # Kopiere das Child-SPEC (Steuerungsdatei)
-cp %{SOURCE1} %{buildroot}%{_usrsrc}/akmods/%{name}-kmod.spec
+cp %{SOURCE1} %{_specdir}/%{name}-kmod.spec
 
 # 2. udev & hwdb Files (deine Logik)
 mkdir -p %{buildroot}%{_udevrulesdir}
