@@ -58,10 +58,9 @@ cp 61-keyboard-tuxedo.hwdb %{buildroot}%{_udevhwdbdir}/
 mkdir -p %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
 tar xzf %{SOURCE0} --strip-components=1 -C %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
 
-%files common
+%files
+/%{_usrsrc}/akmods/%{name}-%{version}-%{release}.src.rpm
 /%{_udevrulesdir}/*.rules
 /%{_udevhwdbdir}/*.hwdb
 
-%files
-/%{_usrsrc}/akmods/%{name}-%{version}-%{release}.src.rpm
 
