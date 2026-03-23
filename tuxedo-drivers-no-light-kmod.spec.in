@@ -8,6 +8,8 @@ Release:        1%{?dist}
 Summary:        Kernel module for Tuxedo Drivers
 License:        GPL-2.0-or-later
 
+Source0:        v4.13.1.tar.gz
+
 BuildRequires:  kernel-devel, make, gcc
 %{expand:%(kmodtool --target %{_target_cpu} --kmodname tuxedo-drivers %{?buildforkernels:--%{buildforkernels}} 2>/dev/null) }
 
@@ -16,7 +18,7 @@ LKM for Tuxedo hardware.
 
 %prep
 %setup -q -c -T -a 0
-tar xzf tuxedo-drivers-v4.13.1.tar.gz
+tar xzf v4.13.1.tar.gz
 # Hier die Pfade anpassen, damit sie zum Entpacken des Tarballs passen
 cd tuxedo-drivers-%{version}
 

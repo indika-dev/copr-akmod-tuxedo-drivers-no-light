@@ -43,6 +43,7 @@ Contains udev rules and hwdb configurations.
 mkdir -p %{buildroot}%{_usrsrc}/akmods/
 # Kopiere das Child-SPEC (Steuerungsdatei)
 cp %{SOURCE1} %{_specdir}/%{name}-kmod.spec
+cp %{SOURCE0} %{buildroot}%{_usrsrc}/akmods/
 
 # 2. udev & hwdb Files (deine Logik)
 mkdir -p %{buildroot}%{_udevrulesdir}
@@ -55,7 +56,6 @@ cp 61-keyboard-tuxedo.hwdb %{buildroot}%{_udevhwdbdir}/
 
 # 3. Akmod Steuerungs-Dateien generieren
 %{?akmod_install}
-cp %{SOURCE0} %{buildroot}%{_usrsrc}/akmods/%{modname}-v%{version}.tar.gz
 
 %files common
 %{_udevrulesdir}/*.rules
