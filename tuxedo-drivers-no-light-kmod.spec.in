@@ -2,7 +2,7 @@
 %global buildforkernels akmod
 %global debug_package %{nil}
 
-Name:           tuxedo-drivers-kmod
+Name:           akmod-tuxedo-drivers-no-light
 Version:        4.13.1
 Release:        1%{?dist}
 Summary:        Kernel module for Tuxedo Drivers
