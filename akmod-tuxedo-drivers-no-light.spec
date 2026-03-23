@@ -55,7 +55,7 @@ mkdir -p %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
 tar xzf %{SOURCE0} --strip-components=1 -C %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
 
 %files
-/%{_usrsrc}/akmods/%{name}-%{version}-1%{dist}.src.rpm
+/%{_usrsrc}/akmods/%{name}-kmod-%{version}-1%{dist}.src.rpm
 
 %package common
 Summary:  Common configuration files for Tuxedo drivers

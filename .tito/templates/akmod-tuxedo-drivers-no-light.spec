@@ -39,20 +39,7 @@ mkdir -p %{buildroot}%{_usrsrc}/akmods
 # Kopiere das Child-SPEC (Steuerungsdatei)
 cp %{SOURCE1} %{_specdir}/%{name}.spec
 
-# 3. Akmod Steuerungs-Dateien generieren
-%{?akmod_install}
-mkdir -p %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
-tar xzf %{SOURCE0} --strip-components=1 -C %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
-
-%files
-/%{_usrsrc}/akmods/%{name}-%{version}-1%{dist}.src.rpm
-
-%package common
-Summary:  Common configuration files for Tuxedo drivers
-%description common
-Contains udev rules and hwdb configurations.
-
-%install common
+# 2. udev & hwdb Files (deine Logik)
 mkdir -p %{buildroot}/usr/lib/udev/rules.d/
 mkdir -p %{buildroot}/usr/lib/udev/hwdb.d/
 
@@ -62,7 +49,18 @@ install -D -m 644 99-z-tuxedo-systemd-fix.rules %{buildroot}/usr/lib/udev/rules.
 install -D -m 644 61-sensor-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
 install -D -m 644 61-keyboard-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
 
-%build common
+# 3. Akmod Steuerungs-Dateien generieren
+%{?akmod_install}
+mkdir -p %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
+tar xzf %{SOURCE0} --strip-components=1 -C %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
+
+%files
+/%{_usrsrc}/akmods/%{name}-kmod-%{version}-1%{dist}.src.rpm
+
+%package common
+Summary:  Common configuration files for Tuxedo drivers
+%description common
+Contains udev rules and hwdb configurations.
 
 %files common
 %{_modulesloaddir}/*.conf
@@ -70,3 +68,7 @@ install -D -m 644 61-keyboard-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
 /usr/lib/udev/hwdb.d/*.hwdb
 
 %changelog common
+* Mon Mar 23 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-65
+- prepare for initial build (stefan.maassen@posteo.de)
+- prepare for initial build (stefan.maassen@posteo.de)
+
