@@ -45,8 +45,8 @@ mkdir -p %{buildroot}%{_usrsrc}/akmods
 cp %{SOURCE1} %{_specdir}/%{name}-kmod.spec
 
 # 2. udev & hwdb Files (deine Logik)
-mkdir -p %{buildroot}%{_udevrulesdir}
-mkdir -p %{buildroot}%{_udevhwdbdir}
+mkdir -p %{buildroot}/usr/lib/udev/rules.d/
+mkdir -p %{buildroot}/usr/lib/udev/hwdb.d/
 
 cp 99-infinityflex-touchpanel-toggle.rules %{buildroot}/usr/lib/udev/rules.d/
 cp 99-z-tuxedo-systemd-fix.rules %{buildroot}/usr/lib/udev/rules.d/
