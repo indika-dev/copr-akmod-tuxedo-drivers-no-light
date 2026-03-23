@@ -59,9 +59,9 @@ mkdir -p %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
 tar xzf %{SOURCE0} --strip-components=1 -C %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
 
 %files common
-%{_udevrulesdir}/*.rules
-%{_udevhwdbdir}/*.hwdb
+/%{_udevrulesdir}/*.rules
+/%{_udevhwdbdir}/*.hwdb
 
 %files
-%{_usrsrc}/akmods/%{name}-%{version}-%{release}.src.rpm
+/%{_usrsrc}/akmods/%{name}-%{version}-%{release}.src.rpm
 

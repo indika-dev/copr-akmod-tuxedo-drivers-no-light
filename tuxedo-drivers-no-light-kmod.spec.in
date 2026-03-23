@@ -31,5 +31,5 @@ done
 %{?akmod_install}
 
 %files
-%{modname}-%{version}.tar.gz
-%{name}-kmod.spec
+/%{_usrsrc}/akmods/%{modname}-%{version}
+/%{_usrsrc}/akmods/%{name}-kmod.spec
