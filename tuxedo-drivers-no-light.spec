@@ -6,7 +6,7 @@
 
 Name:           tuxedo-drivers-no-light
 Version:        4.13.1
-Release:        47%{?dist}
+Release:        48%{?dist}
 Summary:        Tuxedo drivers akmod (no light version)
 License:        GPL-2.0-or-later
 URL:            https://github.com/indika-dev/copr-akmod-tuxedo-drivers-no-light
@@ -40,10 +40,9 @@ Contains udev rules and hwdb configurations.
 
 %install
 # 1. Akmod-Sourcen vorbereiten
-mkdir -p %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
+mkdir -p %{buildroot}%{_usrsrc}/akmods
 # Kopiere das Child-SPEC (Steuerungsdatei)
 cp %{SOURCE1} %{_specdir}/%{name}-kmod.spec
-tar xzf %{SOURCE0} --strip-components=1 -C %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
 
 # 2. udev & hwdb Files (deine Logik)
 mkdir -p %{buildroot}%{_udevrulesdir}
@@ -56,6 +55,8 @@ cp 61-keyboard-tuxedo.hwdb %{buildroot}%{_udevhwdbdir}/
 
 # 3. Akmod Steuerungs-Dateien generieren
 %{?akmod_install}
+mkdir -p %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
+tar xzf %{SOURCE0} --strip-components=1 -C %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
 
 %files common
 %{_udevrulesdir}/*.rules
