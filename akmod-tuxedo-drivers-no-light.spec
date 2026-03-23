@@ -39,6 +39,16 @@ mkdir -p %{buildroot}%{_usrsrc}/akmods
 # Kopiere das Child-SPEC (Steuerungsdatei)
 cp %{SOURCE1} %{_specdir}/%{name}.spec
 
+# 2. udev & hwdb Files (deine Logik)
+mkdir -p %{buildroot}/usr/lib/udev/rules.d/
+mkdir -p %{buildroot}/usr/lib/udev/hwdb.d/
+
+install -D -m 644 tuxedo_keyboard.conf %{_modulesloaddir}/tuxedo_keyboard.conf
+install -D -m 644 99-infinityflex-touchpanel-toggle.rules %{buildroot}/usr/lib/udev/rules.d/
+install -D -m 644 99-z-tuxedo-systemd-fix.rules %{buildroot}/usr/lib/udev/rules.d/
+install -D -m 644 61-sensor-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
+install -D -m 644 61-keyboard-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
+
 # 3. Akmod Steuerungs-Dateien generieren
 %{?akmod_install}
 mkdir -p %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
@@ -51,18 +61,6 @@ tar xzf %{SOURCE0} --strip-components=1 -C %{buildroot}%{_usrsrc}/akmods/%{modna
 Summary:  Common configuration files for Tuxedo drivers
 %description common
 Contains udev rules and hwdb configurations.
-
-%install common
-mkdir -p %{buildroot}/usr/lib/udev/rules.d/
-mkdir -p %{buildroot}/usr/lib/udev/hwdb.d/
-
-install -D -m 644 tuxedo_keyboard.conf %{_modulesloaddir}/tuxedo_keyboard.conf
-install -D -m 644 99-infinityflex-touchpanel-toggle.rules %{buildroot}/usr/lib/udev/rules.d/
-install -D -m 644 99-z-tuxedo-systemd-fix.rules %{buildroot}/usr/lib/udev/rules.d/
-install -D -m 644 61-sensor-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
-install -D -m 644 61-keyboard-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
-
-%build common
 
 %files common
 %{_modulesloaddir}/*.conf
