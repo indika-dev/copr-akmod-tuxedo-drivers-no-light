@@ -50,8 +50,8 @@ mkdir -p %{buildroot}/usr/lib/udev/hwdb.d/
 
 cp 99-infinityflex-touchpanel-toggle.rules %{buildroot}/usr/lib/udev/rules.d/
 cp 99-z-tuxedo-systemd-fix.rules %{buildroot}/usr/lib/udev/rules.d/
-cp 61-sensor-tuxedo.hwdb %{buildroot}%/usr/lib/udev/hwdb.d/
-cp 61-keyboard-tuxedo.hwdb %{buildroot}%/usr/lib/udev/hwdb.d/
+cp 61-sensor-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
+cp 61-keyboard-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
 
 # 3. Akmod Steuerungs-Dateien generieren
 %{?akmod_install}
