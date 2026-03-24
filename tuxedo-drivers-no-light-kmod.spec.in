@@ -40,3 +40,4 @@ done
 
 %files
 /lib/modules/**/*.ko
+/%{_usrsrc}/akmods/%{name}.spec
