@@ -1,7 +1,6 @@
 %global         modname                 tuxedo-drivers
 %global         buildforkernels         akmod
 %global         debug_package           %{nil}
-%global         __requires_exclude      ^.*-kmod-common.*$
 
 %define releasenumber %(echo %{release} | grep -o '[0-9]*' | head -1 )
 
@@ -16,8 +15,6 @@ URL:            https://github.com/indika-dev/copr-akmod-tuxedo-drivers-no-light
 # BuildArch:      noarch
 Source0:        https://github.com/tuxedocomputers/tuxedo-drivers/archive/refs/tags/v4.13.1.tar.gz
 Source1:        tuxedo-drivers-no-light-kmod.spec.in
-
-Provides:       tuxedo-drivers-no-light-kmod-common = %{version}-%{release}
 
 BuildRequires:  kmodtool
 # Diese werden benötigt, damit das Akmod auf dem Zielsystem bauen kann
@@ -40,8 +37,6 @@ Tuxedo drivers as akmod package.
 cp %{SOURCE0} %{_sourcedir}/%{modname}-%{version}.tar.gz
 # Kopiere das Child-SPEC (Steuerungsdatei)
 cp %{SOURCE1} %{_specdir}/%{name}-kmod.spec
-cp %{SOURCE1} %{_specdir}/%{name}.spec
-cp %{SOURCE1} %{_sourcedir}/%{name}-kmod.spec
 
 # 3. Akmod Steuerungs-Dateien generieren
 %{?akmod_install}
