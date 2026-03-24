@@ -37,6 +37,7 @@ Tuxedo drivers as akmod package.
 cp %{SOURCE0} %{_sourcedir}/%{modname}-%{version}.tar.gz
 # Kopiere das Child-SPEC (Steuerungsdatei)
 cp %{SOURCE1} %{_specdir}/%{name}.spec
+cp %{SOURCE1} %{_sourcedir}/%{name}-kmod.spec
 
 # 2. udev & hwdb Files (deine Logik)
 mkdir -p %{buildroot}/usr/lib/udev/rules.d/

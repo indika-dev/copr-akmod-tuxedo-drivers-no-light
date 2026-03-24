@@ -37,6 +37,7 @@ Tuxedo drivers as akmod package.
 cp %{SOURCE0} %{_sourcedir}/%{modname}-%{version}.tar.gz
 # Kopiere das Child-SPEC (Steuerungsdatei)
 cp %{SOURCE1} %{_specdir}/%{name}.spec
+cp %{SOURCE1} %{_sourcedir}/%{name}-kmod.spec
 
 # 2. udev & hwdb Files (deine Logik)
 mkdir -p %{buildroot}/usr/lib/udev/rules.d/
@@ -68,6 +69,10 @@ Contains udev rules and hwdb configurations.
 /usr/lib/udev/hwdb.d/*.hwdb
 
 %changelog kmod-common
+* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-80
+- prepare for initial build (stefan.maassen@posteo.de)
+- prepare for initial build (stefan.maassen@posteo.de)
+
 * Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-79
 - prepare for initial build (stefan.maassen@posteo.de)
 
