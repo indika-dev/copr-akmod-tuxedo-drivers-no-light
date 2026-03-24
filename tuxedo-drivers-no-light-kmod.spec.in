@@ -10,6 +10,7 @@ Summary:        Kernel module for Tuxedo Drivers
 License:        GPL-2.0-or-later
 
 BuildRequires:  kernel-devel, make, gcc
+BuildRequires: kmodtool
 %{expand:%(kmodtool --target %{_target_cpu} --kmodname tuxedo-drivers %{?buildforkernels:--%{buildforkernels}} 2>/dev/null) }
 
 %description
@@ -17,17 +18,20 @@ LKM for Tuxedo hardware.
 
 %prep
 %setup -q -c -T -a 0
-# Hier die Pfade anpassen, damit sie zum Entpacken des Tarballs passen
-cd tuxedo-drivers-%{version}
+cd %{modname}-%{version}
+for kernel_version  in %{?kernel_versions} ; do
+  cp -a src _kmod_build_${kernel_version%%___*}
+done
 
 %build
 for kernel_version in %{?kernel_versions}; do
-    make -C /lib/modules/${kernel_version%%___*}/build M=$PWD modules
+  make V=1 %{?_smp_mflags} -C /lib/modules/${kernel_version%%___*}/build M=${PWD}/%{modname}-%{version}/_kmod_build_${kernel_version%%___*} modules
 done
 
 %install
 for kernel_version in %{?kernel_versions}; do
-    for item in $$(find . -type d -name *.ko) ; do install $${item} -D -m 755 %{buildroot}/lib/modules/${kernel_version%%___*}/extra/tuxedo-drivers/ ; done
+  mkdir -p %{buildroot}/lib/modules/${kernel_version%%___*}/extra/%{modname}-no-light/
+  for item in $$(find %{modname}-%{version}/_kmod_build_${kernel_version%%___*} -type f -name *.ko) ; do install $${item} -D -m 755 %{buildroot}/lib/modules/${kernel_version%%___*}/extra/tuxedo-drivers-no-light/ ; done
 done
 %{?akmod_install}
 
