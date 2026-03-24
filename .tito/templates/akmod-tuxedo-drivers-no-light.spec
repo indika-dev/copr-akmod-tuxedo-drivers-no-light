@@ -21,7 +21,7 @@ BuildRequires:  kmodtool
 Requires:       akmods
 
 # Dynamische Erstellung der Akmod-Paketbeschreibungen
-%{expand:%(kmodtool --target %{_target_cpu} --kmodname %{name} %{?buildforkernels:--%{buildforkernels}} 2>/dev/null) }
+%{expand:%(kmodtool --target %{_target_cpu} --kmodname %{name} %{?buildforkernels:--%{buildforkernels}} --no-kmod-common 2>/dev/null) }
 
 %description
 Tuxedo drivers as akmod package.
