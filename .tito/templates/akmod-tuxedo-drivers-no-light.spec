@@ -61,7 +61,7 @@ tar xzf %{SOURCE0} --strip-components=1 -C %{buildroot}%{_usrsrc}/akmods/%{modna
 %package kmod-common
 Summary:  Common configuration files for Tuxedo drivers
 Provides: %{name}-common = %{version}-%{release}
-%description common
+%description kmod-common
 Contains udev rules and hwdb configurations.
 
 %files kmod-common
