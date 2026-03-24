@@ -9,6 +9,7 @@ Release:        1%{?dist}
 Summary:        Kernel module for Tuxedo Drivers
 License:        GPL-2.0-or-later
 Source0:        %{modname}-%{version}.tar.gz
+Source1:        tuxedo-drivers-no-light-kmod.spec
 
 BuildRequires:  kernel-devel, make, gcc
 BuildRequires: kmodtool
@@ -19,6 +20,7 @@ LKM for Tuxedo hardware.
 
 %prep
 %setup -q -c -T -a 0
+cp %{SOURCE1} %{_specdir}/
 cd %{modname}-%{version}
 for kernel_version  in %{?kernel_versions} ; do
   cp -a src _kmod_build_${kernel_version%%___*}
