@@ -36,7 +36,7 @@ Tuxedo drivers as akmod package.
 # 1. Akmod-Sourcen vorbereiten
 cp %{SOURCE0} %{_sourcedir}/%{modname}-%{version}.tar.gz
 # Kopiere das Child-SPEC (Steuerungsdatei)
-cp %{SOURCE1} %{_specdir}/%{name}-kmod.spec
+cp %{SOURCE1} %{_specdir}/%{name}.spec
 
 # 3. Akmod Steuerungs-Dateien generieren
 %{?akmod_install}
