@@ -5,7 +5,7 @@
 
 %define releasenumber %(echo %{release} | grep -o '[0-9]*' | head -1 )
 
-Name:           tuxedo-drivers-no-light
+Name:           akmod-tuxedo-drivers-no-light
 Version:        4.13.1
 Release:        $release%{?dist}
 Summary:        Tuxedo drivers akmod (no light version)
