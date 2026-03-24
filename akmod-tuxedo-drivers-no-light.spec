@@ -6,7 +6,7 @@
 
 Name:           tuxedo-drivers-no-light
 Version:        4.13.1
-Release:        70%{?dist}
+Release:        71%{?dist}
 Summary:        Tuxedo drivers akmod (no light version)
 License:        GPL-2.0-or-later
 URL:            https://github.com/indika-dev/copr-akmod-tuxedo-drivers-no-light
@@ -70,6 +70,10 @@ Contains udev rules and hwdb configurations.
 /usr/lib/udev/hwdb.d/*.hwdb
 
 %changelog kmod-common
+* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-71
+- prepare for initial build (stefan.maassen@posteo.de)
+- prepare for initial build (stefan.maassen@posteo.de)
+
 * Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-67
 - prepare for initial build (stefan.maassen@posteo.de)
 
