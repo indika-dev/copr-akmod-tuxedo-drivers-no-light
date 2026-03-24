@@ -32,10 +32,11 @@ done
 %install
 for kernel_version in %{?kernel_versions}; do
   mkdir -p %{buildroot}/lib/modules/${kernel_version%%___*}/extra/%{modname}-no-light/
-  for item in $$(find %{modname}-%{version}/_kmod_build_${kernel_version%%___*} -type f -name *.ko) ; do install $${item} -D -m 755 %{buildroot}/lib/modules/${kernel_version%%___*}/extra/tuxedo-drivers-no-light/ ; done
+  install -D -m 755 %{modname}-%{version}/_kmod_build_${kernel_version%%___*}/**/*.ko %{buildroot}/lib/modules/${kernel_version%%___*}/extra/%{modname}-no-light/
+  install -D -m 755 %{modname}-%{version}/_kmod_build_${kernel_version%%___*}/*.ko %{buildroot}/lib/modules/${kernel_version%%___*}/extra/%{modname}-no-light/
+  chmod a+x %{buildroot}/lib/modules/${kernel_version%%___*}/extra/%{modname}-no-light/*.ko
 done
 %{?akmod_install}
 
 %files
-/%{_usrsrc}/akmods/%{modname}-%{version}
-/%{_usrsrc}/akmods/%{name}.spec
+/lib/modules/**/*.ko
