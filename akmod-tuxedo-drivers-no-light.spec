@@ -39,78 +39,9 @@ cp %{SOURCE0} %{_sourcedir}/%{modname}-%{version}.tar.gz
 cp %{SOURCE1} %{_specdir}/%{name}.spec
 cp %{SOURCE1} %{_sourcedir}/%{name}-kmod.spec
 
-# 2. udev & hwdb Files (deine Logik)
-mkdir -p %{buildroot}/usr/lib/udev/rules.d/
-mkdir -p %{buildroot}/usr/lib/udev/hwdb.d/
-mkdir -p %{buildroot}/etc/modules-load.d/
-
-install -D -m 644 tuxedo_keyboard.conf %{buildroot}/etc/modules-load.d/tuxedo_keyboard.conf
-install -D -m 644 99-infinityflex-touchpanel-toggle.rules %{buildroot}/usr/lib/udev/rules.d/
-install -D -m 644 99-z-tuxedo-systemd-fix.rules %{buildroot}/usr/lib/udev/rules.d/
-install -D -m 644 61-sensor-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
-install -D -m 644 61-keyboard-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
-
-
 # 3. Akmod Steuerungs-Dateien generieren
 %{?akmod_install}
 
 %files
 /%{_usrsrc}/akmods/%{name}-kmod-%{version}-1%{dist}.src.rpm
-
-%package kmod-common
-Summary:  Common configuration files for Tuxedo drivers
-Provides: %{name}-common = %{version}-%{release}
-%description kmod-common
-Contains udev rules and hwdb configurations.
-
-%files kmod-common
-/etc/modules-load.d/*.conf
-/usr/lib/udev/rules.d/*.rules
-/usr/lib/udev/hwdb.d/*.hwdb
-
-%changelog kmod-common
-* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-81
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-80
-- prepare for initial build (stefan.maassen@posteo.de)
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-79
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-78
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-77
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-76
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-75
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-74
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-73
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-72
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-71
-- prepare for initial build (stefan.maassen@posteo.de)
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-67
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Mon Mar 23 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-66
-- prepare for initial build (stefan.maassen@posteo.de)
-
-* Mon Mar 23 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-65
-- prepare for initial build (stefan.maassen@posteo.de)
-- prepare for initial build (stefan.maassen@posteo.de)
 

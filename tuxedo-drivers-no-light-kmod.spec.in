@@ -32,6 +32,17 @@ for kernel_version in %{?kernel_versions}; do
 done
 
 %install
+# 2. udev & hwdb Files (deine Logik)
+mkdir -p %{buildroot}/usr/lib/udev/rules.d/
+mkdir -p %{buildroot}/usr/lib/udev/hwdb.d/
+mkdir -p %{buildroot}/etc/modules-load.d/
+
+install -D -m 644 %{modname}-%{version}/tuxedo_keyboard.conf %{buildroot}/etc/modules-load.d/tuxedo_keyboard.conf
+install -D -m 644 %{modname}-%{version}/99-infinityflex-touchpanel-toggle.rules %{buildroot}/usr/lib/udev/rules.d/
+install -D -m 644 %{modname}-%{version}/99-z-tuxedo-systemd-fix.rules %{buildroot}/usr/lib/udev/rules.d/
+install -D -m 644 %{modname}-%{version}/61-sensor-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
+install -D -m 644 %{modname}-%{version}/61-keyboard-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
+
 for kernel_version in %{?kernel_versions}; do
   mkdir -p %{buildroot}/lib/modules/${kernel_version%%___*}/extra/%{modname}-no-light/
   install -D -m 755 %{modname}-%{version}/_kmod_build_${kernel_version%%___*}/**/*.ko %{buildroot}/lib/modules/${kernel_version%%___*}/extra/%{modname}-no-light/
@@ -42,3 +53,61 @@ done
 
 %files
 # Die Dateiliste wird automatisch durch das kmodtool-Makro befüllt
+
+%package common
+Summary:  Common configuration files for Tuxedo drivers
+Provides: %{name}-common = %{version}-%{release}
+%description kmod-common
+Contains udev rules and hwdb configurations.
+
+%files common
+/etc/modules-load.d/*.conf
+/usr/lib/udev/rules.d/*.rules
+/usr/lib/udev/hwdb.d/*.hwdb
+
+%changelog common
+* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-81
+- prepare for initial build (stefan.maassen@posteo.de)
+
+* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-80
+- prepare for initial build (stefan.maassen@posteo.de)
+- prepare for initial build (stefan.maassen@posteo.de)
+
+* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-79
+- prepare for initial build (stefan.maassen@posteo.de)
+
+* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-78
+- prepare for initial build (stefan.maassen@posteo.de)
+
+* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-77
+- prepare for initial build (stefan.maassen@posteo.de)
+
+* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-76
+- prepare for initial build (stefan.maassen@posteo.de)
+
+* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-75
+- prepare for initial build (stefan.maassen@posteo.de)
+
+* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-74
+- prepare for initial build (stefan.maassen@posteo.de)
+
+* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-73
+- prepare for initial build (stefan.maassen@posteo.de)
+
+* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-72
+- prepare for initial build (stefan.maassen@posteo.de)
+
+* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-71
+- prepare for initial build (stefan.maassen@posteo.de)
+- prepare for initial build (stefan.maassen@posteo.de)
+
+* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-67
+- prepare for initial build (stefan.maassen@posteo.de)
+
+* Mon Mar 23 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-66
+- prepare for initial build (stefan.maassen@posteo.de)
+
+* Mon Mar 23 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-65
+- prepare for initial build (stefan.maassen@posteo.de)
+- prepare for initial build (stefan.maassen@posteo.de)
+
