@@ -34,7 +34,8 @@ Tuxedo drivers as akmod package.
 
 %install
 # 1. Akmod-Sourcen vorbereiten
-mkdir -p %{buildroot}%{_usrsrc}/akmods
+mkdir -p %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
+tar xzf %{SOURCE0} --strip-components=1 -C %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
 # Kopiere das Child-SPEC (Steuerungsdatei)
 cp %{SOURCE1} %{_specdir}/%{name}.spec
 
@@ -52,8 +53,6 @@ install -D -m 644 61-keyboard-tuxedo.hwdb %{buildroot}/usr/lib/udev/hwdb.d/
 
 # 3. Akmod Steuerungs-Dateien generieren
 %{?akmod_install}
-mkdir -p %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
-tar xzf %{SOURCE0} --strip-components=1 -C %{buildroot}%{_usrsrc}/akmods/%{modname}-%{version}
 
 %files
 /%{_usrsrc}/akmods/%{name}-kmod-%{version}-1%{dist}.src.rpm
@@ -70,6 +69,16 @@ Contains udev rules and hwdb configurations.
 /usr/lib/udev/hwdb.d/*.hwdb
 
 %changelog kmod-common
+* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-73
+- prepare for initial build (stefan.maassen@posteo.de)
+
+* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-72
+- prepare for initial build (stefan.maassen@posteo.de)
+
+* Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-71
+- prepare for initial build (stefan.maassen@posteo.de)
+- prepare for initial build (stefan.maassen@posteo.de)
+
 * Tue Mar 24 2026 Stefan Maaßen <stefan.maassen@posteo.de> 4.13.1-67
 - prepare for initial build (stefan.maassen@posteo.de)
 
