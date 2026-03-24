@@ -5,7 +5,7 @@
 
 %define releasenumber %(echo %{release} | grep -o '[0-9]*' | head -1 )
 
-Name:           akmod-tuxedo-drivers-no-light
+Name:           tuxedo-drivers-no-light
 Version:        4.13.1
 Release:        $release%{?dist}
 Summary:        Tuxedo drivers akmod (no light version)
@@ -38,6 +38,7 @@ Tuxedo drivers as akmod package.
 cp %{SOURCE0} %{_sourcedir}/%{modname}-%{version}.tar.gz
 # Kopiere das Child-SPEC (Steuerungsdatei)
 cp %{SOURCE1} %{_specdir}/%{name}-kmod.spec
+cp %{SOURCE1} %{_specdir}/%{name}.spec
 cp %{SOURCE1} %{_sourcedir}/%{name}-kmod.spec
 
 # 3. Akmod Steuerungs-Dateien generieren
